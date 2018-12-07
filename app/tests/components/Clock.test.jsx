@@ -13,9 +13,9 @@ describe('Clock', () => {
     
     describe('render', ()=>{
         it('should render clock to output', ()=>{
-            var clock = TestUtils.renderIntoDocument(<Clock seconds={65}/>);
+            var clock = TestUtils.renderIntoDocument(<Clock totalSeconds={65}/>);
             var $el =  $(ReactDOM.findDOMNode(clock)); //get the root dom el of the component
-            var actualText = $el.find('.clock-text').text(); 
+            var actualText = $el.find('.clock-text').text(); //clock text is the span holding the number of seconds
             var expectedText = "01:05";
             expect(actualText).toBe(expectedText);
         });

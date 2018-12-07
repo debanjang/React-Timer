@@ -2,11 +2,11 @@ var React = require('react');
 
 var Clock = React.createClass({
     getDefaultProps: function(){
-        seconds: 0
+        totalSeconds: 0
     },
 
     propTypes:{
-        seconds: React.PropTypes.number
+        totalSeconds: React.PropTypes.number
     },
 
     formatSeconds: function(totalSeconds){
@@ -25,11 +25,11 @@ var Clock = React.createClass({
     },
     
     render: function(){
-        var  {seconds} = this.props;
+        var  {totalSeconds} = this.props;
         return(
             <div className= "clock">
                 <span className= "clock-text">
-                    {this.formatSeconds(seconds)}
+                    {this.formatSeconds(totalSeconds)}
                 </span>
             </div>
         );

@@ -3,7 +3,7 @@ var webpack = require('webpack'); //import the webpack utilities
 module.exports = {
     entry:[
       'jquery/dist/jquery.min.js',
-      'foundation-sites/dist/js/foundation.min.js',
+      'foundation-sites/dist/foundation.min.js',
       './app/app.jsx'
     ], //entry point for the application
     external: {
@@ -29,6 +29,7 @@ module.exports = {
           Timer: 'app/components/Timer.jsx',
           Countdown: 'app/components/Countdown.jsx',
           Clock:'app/components/Clock.jsx',
+          CountdownForm: 'app/components/CountdownForm.jsx',
           applicationStyles: 'app/styles/app.scss'
         },
         extensions: ['', '.js', '.jsx']  //what all file extensions to pick up

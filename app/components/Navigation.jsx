@@ -33,7 +33,7 @@ var {Link, IndexLink} = require('react-router');
     }
 }); */
 
-var Nav = () => {
+var Navigation = () => {
     return(
         <div className="top-bar">
             <div className="top-bar-left">
@@ -63,4 +63,4 @@ var Nav = () => {
     );
 }
 
-module.exports= Nav;
+module.exports= Navigation;
