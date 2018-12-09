@@ -33,7 +33,7 @@ describe('Countdown', ()=>{
                 //Since Mocha by default does not support asynchronous function calls and will not
                 //wait for the timeout interval,
                 //we use done as an indicator. A ref to done is sent as an arg to the
-                //it arrow function and by calling it we ensure that the test waits for completion
+                //'it' arrow function and by calling it we ensure that the test waits for completion
                 //until we call done.
                 done();
             }, 1001);
@@ -46,6 +46,38 @@ describe('Countdown', ()=>{
                 expect(countdown.state.count).toBe(0);
                 done();
             }, 3001)
+        });
+
+        it('should pause countdown when status is paused',(done) =>{
+            var countdown = TestUtil.renderIntoDocument(<Countdown/>);
+            //Start the countdown with 3 seconds
+            countdown.handleSetCountdown(3);
+            //Change the status to stopped to trigger appropriate action being called in
+            //componentDidUpdate
+            countdown.handleStatusChange('paused');
+            //Wait for just over a second and verify that the count is still 3 
+            //and the status is still paused
+            setTimeout(()=>{
+                expect(countdown.state.count).toBe(3);
+                expect(countdown.state.countdownStatus).toBe('paused');
+                done();
+            },1001);
+        });
+        
+        it('should reset the timer to zero when status is stopped',(done)=>{
+            var countdown = TestUtil.renderIntoDocument(<Countdown/>);
+            //Start the countdown with 3 seconds
+            countdown.handleSetCountdown(3);
+            //Change the status to stopped to trigger appropriate action being called in
+            //componentDidUpdate
+            countdown.handleStatusChange('stopped');
+            //The count in the timer should immediately change to 0
+            expect(countdown.state.count).toBe(0)    
+            //Wait for just over a second and verify that the count is still 0 
+            //and the status is still stopped
+            expect(countdown.state.count).toBe(0);
+            expect(countdown.state.countdownStatus).toBe('stopped');
+            done();
         });
     });
 });
