@@ -37,8 +37,8 @@ var Countdown = React.createClass({
         ** when the countdownStatus changes and not when anything else does.
         ** Second and the most important is that this method calls shouldComponentUpdate internally
         ** which defaults to true.  As such, we get into an infinite loop as everytime we change
-        ** the state in startTimer, shouldComponentUpdate is called which triggers a background 
-        ** re-render that seriously hampers the performance
+        ** the state in startTimer, shouldComponentUpdate is called which triggers calls to
+        ** componentWillUpdate, render and then componentDidUpdate again.
         */
         if(this.state.countdownStatus != prevState.countdownStatus){
             switch(this.state.countdownStatus){
@@ -50,6 +50,7 @@ var Countdown = React.createClass({
                 case 'paused':
                     clearInterval(this.timer);
                     this.timer = undefined;
+                    break;
             }
         }
     },
@@ -68,6 +69,16 @@ var Countdown = React.createClass({
         },1000);
     },
 
+    /**
+     ** This gets called just before a component is unmounted from the DOM and destroyed.
+     ** We can use this method to cancel any side effects like
+     ** subscriptions, network calls and invalidate timers like the one we have created. 
+     **/  
+    componentWillUnmount: function(){
+        clearInterval(this.timer);
+        this.timer = undefined;
+    },
+
     render: function(){
         var {count, countdownStatus} = this.state;
 
@@ -80,6 +91,7 @@ var Countdown = React.createClass({
         }
         return(
             <div>
+                <h2 className="page-title">Countdown App</h2>
                 <Clock totalSeconds={count}/>
                 {renderControlArea()}
             </div>
