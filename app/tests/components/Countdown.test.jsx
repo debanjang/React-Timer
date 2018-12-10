@@ -72,12 +72,14 @@ describe('Countdown', ()=>{
             //componentDidUpdate
             countdown.handleStatusChange('stopped');
             //The count in the timer should immediately change to 0
-            expect(countdown.state.count).toBe(0)    
-            //Wait for just over a second and verify that the count is still 0 
+           // expect(countdown.state.count).toBe(0)    
+            //Wait for just over a second and verify that the count is 0 
             //and the status is still stopped
-            expect(countdown.state.count).toBe(0);
-            expect(countdown.state.countdownStatus).toBe('stopped');
-            done();
+            setTimeout(()=>{
+                expect(countdown.state.count).toBe(0);
+                expect(countdown.state.countdownStatus).toBe('stopped');
+                done();
+            },1001);
         });
     });
 });
