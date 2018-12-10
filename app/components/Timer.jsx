@@ -27,6 +27,16 @@ var Timer = React.createClass({
         }
     },
 
+    /**
+     ** This gets called just before a component is unmounted from the DOM and destroyed.
+     ** We can use this method to cancel any side effects like
+     ** subscriptions, network calls and invalidate timers like the one we have created. 
+     **/  
+    componentWillUnmount: function(){
+        clearInterval(this.timer);
+        this.timer = undefined;
+    },
+    
     startTimer: function(){
         this.timer = setInterval(()=>{
             this.setState({
