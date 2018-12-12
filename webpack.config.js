@@ -1,4 +1,5 @@
 var webpack = require('webpack'); //import the webpack utilities
+var path = require('path');
 
 module.exports = {
     entry:[
@@ -48,8 +49,15 @@ module.exports = {
                 test: /\.jsx?$/, //Regex that defines what files to be treated by this loader
                 exclude: /(node_modules|bower_components)/ 
                   //Regex to define all out-of-scope directories for this loader.
-            }
+            },
         ]
     },
+    //Load Foundation through scss in order to use all the variables that come bundled with it.
+    sassLoader:{
+        includePaths:[
+            path.resolve(__dirname,'./node_modules/foundation-sites/scss')
+        ]
+    },
+
     devtool: 'cheap-module-eval-source-map'
 };
